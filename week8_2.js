@@ -29,7 +29,7 @@ function showOnUl(Movies){
         let myLi=document.createElement("li");
         myLi.innerHTML=val.name;
         myUl.appendChild(myLi); 
-}
+}}
 
 function getMovies(movieList){
    textRatingMovies=movieList.map(setRatingText);
@@ -66,16 +66,23 @@ function hideList(){
 }
 
 function searchMovie(){
-   let titleOfMovie= document.querySelector("searchInput").value.toString();
+   let titleOfMovie= document.querySelector("#searchInput");
     
-    let filteredMovies=textRatingMovies.filter(isInArray(movie,titleOfMovie));
+            let filteredMovies= textRatingMovies.filter( isInArrayFactory(titleOfMovie.value.toString()));
+
+    
+   
     showOnUl(filteredMovies);
 //    this function show the array in html file on an ul
     
 }
 
-function isInArray(movie, title){
- 
-    return (movie.name.search(title) === -1 );
-}
+//function isInArray(movie, title){
+// 
+//    return (movie.name.search(title) === -1 );
+//}
 
+function isInArrayFactory(title){
+     return movie => (movie.name.search(title) != -1 );
+}
+//    textRatingMovies.filter( isInArrayFactory(titleOfMovie) );
